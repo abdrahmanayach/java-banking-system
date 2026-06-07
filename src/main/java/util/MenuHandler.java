@@ -8,6 +8,7 @@ import service.AccountService;
 import service.CustomerService;
 import service.TransactionService;
 
+import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
@@ -106,7 +107,7 @@ public class MenuHandler {
             String typeChoice = scanner.nextLine().trim();
             AccountType type = typeChoice.equals("1") ? AccountType.SAVINGS : AccountType.CHECKING;
             System.out.print("Enter initial deposit: ");
-            double initialDeposit = Double.parseDouble(scanner.nextLine().trim());
+            BigDecimal initialDeposit = new BigDecimal(scanner.nextLine().trim());
             Account account = accountService.openAccount(customerId, type, initialDeposit);
             System.out.println("Account opened successfully.");
             System.out.println(account.getAccountInfo());
@@ -137,8 +138,8 @@ public class MenuHandler {
             System.out.print("Enter account number: ");
             String accountNumber = scanner.nextLine().trim();
             System.out.print("Enter amount: ");
-            double amount = Double.parseDouble(scanner.nextLine().trim());
-            Transaction transaction = transactionService.deposit(accountNumber, amount);
+            BigDecimal amount = new BigDecimal(scanner.nextLine().trim());
+            transactionService.deposit(accountNumber, amount);
             System.out.println("Deposit successful.");
             System.out.println("New balance: $" + String.format("%,.2f", accountService.getBalance(accountNumber)));
         } catch (NumberFormatException e) {
@@ -153,7 +154,7 @@ public class MenuHandler {
             System.out.print("Enter account number: ");
             String accountNumber = scanner.nextLine().trim();
             System.out.print("Enter amount: ");
-            double amount = Double.parseDouble(scanner.nextLine().trim());
+            BigDecimal amount = new BigDecimal(scanner.nextLine().trim());
             transactionService.withdraw(accountNumber, amount);
             System.out.println("Withdrawal successful.");
             System.out.println("New balance: $" + String.format("%,.2f", accountService.getBalance(accountNumber)));
@@ -171,7 +172,7 @@ public class MenuHandler {
             System.out.print("Enter target account number: ");
             String toAccount = scanner.nextLine().trim();
             System.out.print("Enter amount: ");
-            double amount = Double.parseDouble(scanner.nextLine().trim());
+            BigDecimal amount = new BigDecimal(scanner.nextLine().trim());
             transactionService.transfer(fromAccount, toAccount, amount);
             System.out.println("Transfer successful.");
             System.out.println("New balance: $" + String.format("%,.2f", accountService.getBalance(fromAccount)));
@@ -206,7 +207,7 @@ public class MenuHandler {
         try {
             System.out.print("Enter account number: ");
             String accountNumber = scanner.nextLine().trim();
-            double balance = accountService.getBalance(accountNumber);
+            BigDecimal balance = accountService.getBalance(accountNumber);
             System.out.println("Current balance: $" + String.format("%,.2f", balance));
         } catch (RuntimeException e) {
             System.out.println("Error: " + e.getMessage());
