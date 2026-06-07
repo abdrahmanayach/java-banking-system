@@ -7,6 +7,7 @@ import model.enums.TransactionType;
 import repository.AccountRepository;
 import repository.TransactionRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class TransactionService {
@@ -19,7 +20,7 @@ public class TransactionService {
         this.transactionRepository = transactionRepository;
     }
 
-    public Transaction deposit(String accountNumber, double amount) {
+    public Transaction deposit(String accountNumber, BigDecimal amount) {
         Account account = accountRepository.findByAccountNumber(accountNumber)
                 .orElseThrow(() -> new AccountNotFoundException("Account not found: " + accountNumber));
 
@@ -37,7 +38,7 @@ public class TransactionService {
         return transaction;
     }
 
-    public Transaction withdraw(String accountNumber, double amount) {
+    public Transaction withdraw(String accountNumber, BigDecimal amount) {
         Account account = accountRepository.findByAccountNumber(accountNumber)
                 .orElseThrow(() -> new AccountNotFoundException("Account not found: " + accountNumber));
 
@@ -55,7 +56,7 @@ public class TransactionService {
         return transaction;
     }
 
-    public Transaction transfer(String fromAccountNumber, String toAccountNumber, double amount) {
+    public Transaction transfer(String fromAccountNumber, String toAccountNumber, BigDecimal amount) {
         Account fromAccount = accountRepository.findByAccountNumber(fromAccountNumber)
                 .orElseThrow(() -> new AccountNotFoundException("Account not found: " + fromAccountNumber));
         Account toAccount = accountRepository.findByAccountNumber(toAccountNumber)

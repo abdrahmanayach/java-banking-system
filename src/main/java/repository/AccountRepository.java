@@ -11,5 +11,5 @@ public interface AccountRepository {
     Optional<Account> findByAccountNumber(String accountNumber);
     List<Account> findAll();
     List<Account> findByOwnerId(String ownerId);
-    void delete(String id);
+    void delete(String accountNumber);
 }

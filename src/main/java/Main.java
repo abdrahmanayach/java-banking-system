@@ -2,18 +2,15 @@ import repository.*;
 import service.AccountService;
 import service.CustomerService;
 import service.TransactionService;
-import util.JsonFileManager;
 import util.MenuHandler;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        JsonFileManager fileManager = new JsonFileManager();
-
-        CustomerRepository customerRepository = new CustomerRepositoryImpl(fileManager);
-        AccountRepository accountRepository = new AccountRepositoryImpl(fileManager);
-        TransactionRepository transactionRepository = new TransactionRepositoryImpl(fileManager);
+        CustomerRepository customerRepository = new CustomerRepositoryImpl();
+        AccountRepository accountRepository = new AccountRepositoryImpl();
+        TransactionRepository transactionRepository = new TransactionRepositoryImpl();
 
         CustomerService customerService = new CustomerService(customerRepository);
         AccountService accountService = new AccountService(accountRepository, customerRepository);
