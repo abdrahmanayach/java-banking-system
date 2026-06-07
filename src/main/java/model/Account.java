@@ -3,6 +3,7 @@ package model;
 import exception.InsufficientFundsException;
 import model.enums.AccountType;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -12,9 +13,9 @@ public abstract class Account {
     private final String ownerId;
     private final AccountType accountType;
     private final LocalDateTime createdAt;
-    private double balance;
+    private BigDecimal balance;
 
-    public Account(String ownerId, double initialDeposit, AccountType accountType) {
+    public Account(String ownerId, BigDecimal initialDeposit, AccountType accountType) {
         this.id = UUID.randomUUID().toString();
         this.accountNumber = "ACC-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
         this.ownerId = ownerId;
@@ -23,15 +24,25 @@ public abstract class Account {
         this.createdAt = LocalDateTime.now();
     }
 
-    public void deposit(double amount) {
-        balance += amount;
+    protected Account(String id, String accountNumber, String ownerId,
+                      BigDecimal balance, AccountType accountType, LocalDateTime createdAt) {
+        this.id = id;
+        this.accountNumber = accountNumber;
+        this.ownerId = ownerId;
+        this.balance = balance;
+        this.accountType = accountType;
+        this.createdAt = createdAt;
     }
 
-    public void withdraw(double amount) {
-        if (amount > balance) {
+    public void deposit(BigDecimal amount) {
+        balance = balance.add(amount);
+    }
+
+    public void withdraw(BigDecimal amount) {
+        if (amount.compareTo(balance) > 0) {
             throw new InsufficientFundsException("Insufficient funds");
         }
-        balance -= amount;
+        balance = balance.subtract(amount);
     }
 
     public abstract String getAccountInfo();
@@ -48,11 +59,11 @@ public abstract class Account {
         return ownerId;
     }
 
-    public double getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    protected void setBalance(double balance) {
+    protected void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 

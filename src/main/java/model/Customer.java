@@ -1,12 +1,9 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 public class Customer {
     private final String id;
-    private final List<String> accountIds = new ArrayList<>();
     private String name;
     private String email;
 
@@ -16,12 +13,10 @@ public class Customer {
         this.email = email;
     }
 
-    public void addAccountId(String accountId) {
-        accountIds.add(accountId);
-    }
-
-    public void removeAccountId(String accountId) {
-        accountIds.remove(accountId);
+    public Customer(String id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
     }
 
     public String getId() {
@@ -42,9 +37,5 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public List<String> getAccountIds() {
-        return accountIds;
     }
 }
