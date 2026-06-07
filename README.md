@@ -5,82 +5,81 @@ A feature-rich command-line banking application built with Java, demonstrating c
 ## Features
 
 - **Customer Management**
-  - Register new customers
-  - View all registered customers
-  - Maintain customer profiles
+    - Register new customers
+    - View all registered customers
+    - Maintain customer profiles
 
 - **Account Management**
-  - Create checking and savings accounts
-  - View all customer accounts
-  - Close accounts (with zero balance requirement)
+    - Create checking and savings accounts
+    - View all customer accounts
+    - Close accounts (with zero balance requirement)
 
 - **Account Types**
-  - **Checking Accounts**: Standard accounts with unlimited withdrawals
-  - **Savings Accounts**: Special accounts with daily withdrawal limits (max 3 per day)
+    - **Checking Accounts**: Standard accounts with unlimited withdrawals
+    - **Savings Accounts**: Special accounts with daily withdrawal limits (max 3 per day)
 
 - **Transaction Processing**
-  - Deposit funds
-  - Withdraw funds (with appropriate account constraints)
-  - Transfer funds between accounts
-  - View complete transaction history
+    - Deposit funds
+    - Withdraw funds (with appropriate account constraints)
+    - Transfer funds between accounts
+    - View complete transaction history
 
 - **Error Handling**
-  - Insufficient funds validation
-  - Daily withdrawal limit enforcement
-  - Account and customer existence verification
-  - Graceful exception handling with custom exceptions
+    - Insufficient funds validation
+    - Daily withdrawal limit enforcement
+    - Account and customer existence verification
+    - Graceful exception handling with custom exceptions
 
 ## Tech Stack
 
 - **Language**: Java 21
 - **Build Tool**: Maven
-- **Data Serialization**: GSON (with gson-extras)
+- **Database**: PostgreSQL
+- **Data Access**: Raw JDBC (no ORM)
 - **Architecture Pattern**: Repository Pattern with Service Layer
-- **Data Storage**: JSON files
 
 ## Project Structure
 
 ```
 banking-cli/
-├── src/main/java/
-│   ├── Main.java                          # Application entry point
-│   ├── exception/                         # Custom exceptions
-│   │   ├── AccountNotFoundException
-│   │   ├── CustomerNotFoundException
-│   │   ├── DailyWithdrawalLimitException
-│   │   └── InsufficientFundsException
-│   ├── model/                             # Domain models
-│   │   ├── Account.java
-│   │   ├── CheckingAccount.java
-│   │   ├── SavingsAccount.java
-│   │   ├── Customer.java
-│   │   ├── Transaction.java
-│   │   └── enums/
-│   │       ├── AccountType.java
-│   │       └── TransactionType.java
-│   ├── repository/                        # Data access layer
-│   │   ├── BaseRepository.java
-│   │   ├── AccountRepository.java
-│   │   ├── AccountRepositoryImpl.java
-│   │   ├── CustomerRepository.java
-│   │   ├── CustomerRepositoryImpl.java
-│   │   ├── TransactionRepository.java
-│   │   └── TransactionRepositoryImpl.java
-│   ├── service/                           # Business logic layer
-│   │   ├── AccountService.java
-│   │   ├── CustomerService.java
-│   │   └── TransactionService.java
-│   └── util/                              # Utility classes
-│       ├── JsonFileManager.java
-│       └── MenuHandler.java
-├── data/                                  # Persistent JSON data files
-│   ├── customers.json
-│   ├── accounts.json
-│   └── transactions.json
+├── src/main/
+│   ├── java/
+│   │   ├── Main.java                          # Application entry point
+│   │   ├── exception/                         # Custom exceptions
+│   │   │   ├── AccountNotFoundException
+│   │   │   ├── CustomerNotFoundException
+│   │   │   ├── DailyWithdrawalLimitException
+│   │   │   └── InsufficientFundsException
+│   │   ├── model/                             # Domain models
+│   │   │   ├── Account.java
+│   │   │   ├── CheckingAccount.java
+│   │   │   ├── SavingsAccount.java
+│   │   │   ├── Customer.java
+│   │   │   ├── Transaction.java
+│   │   │   └── enums/
+│   │   │       ├── AccountType.java
+│   │   │       └── TransactionType.java
+│   │   ├── repository/                        # Data access layer
+│   │   │   ├── AccountRepository.java
+│   │   │   ├── AccountRepositoryImpl.java
+│   │   │   ├── CustomerRepository.java
+│   │   │   ├── CustomerRepositoryImpl.java
+│   │   │   ├── TransactionRepository.java
+│   │   │   └── TransactionRepositoryImpl.java
+│   │   ├── service/                           # Business logic layer
+│   │   │   ├── AccountService.java
+│   │   │   ├── CustomerService.java
+│   │   │   └── TransactionService.java
+│   │   └── util/                              # Utility classes
+│   │       ├── DatabaseConnection.java
+│   │       └── MenuHandler.java
+│   └── resources/
+│       ├── schema.sql                         # Database schema
+│       └── db.properties                      # DB credentials (not committed)
 └── pom.xml
 ```
 
-## Architecture & Design Patterns
+## Architecture
 
 ### Repository Pattern
 
@@ -93,6 +92,34 @@ Business logic is separated into dedicated service classes (`AccountService`, `C
 ### Abstract Base Classes
 
 The `Account` class uses inheritance to create specialized account types (Checking, Savings) with different behavior while sharing common functionality.
+
+## Database Setup
+
+### Prerequisites
+
+- PostgreSQL installed and running
+
+### Create the database
+
+```sql
+CREATE DATABASE banking_cli;
+```
+
+### Run the schema
+
+```bash
+psql -U postgres -d banking_cli -f src/main/resources/schema.sql
+```
+
+### Configure credentials
+
+Create `src/main/resources/db.properties` (this file is excluded from version control):
+
+```properties
+db.url=jdbc:postgresql://localhost:5432/banking_cli
+db.user=your_username
+db.password=your_password
+```
 
 ## Usage
 
@@ -137,4 +164,4 @@ Savings accounts implement a daily withdrawal limit of 3 transactions per calend
 
 ### Data Persistence
 
-The `JsonFileManager` handles all file I/O operations, serializing/deserializing Java objects to JSON format using GSON.
+All data is persisted in a PostgreSQL database using raw JDBC via `PreparedStatement`. Each repository implementation maps SQL result sets directly to Java objects with no ORM involved.
