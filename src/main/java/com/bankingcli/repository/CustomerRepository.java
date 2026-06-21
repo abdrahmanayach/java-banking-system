@@ -1,6 +1,6 @@
-package repository;
+package com.bankingcli.repository;
 
-import model.Customer;
+import com.bankingcli.model.Customer;
 
 import java.util.List;
 import java.util.Optional;

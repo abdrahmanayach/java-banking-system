@@ -1,12 +1,12 @@
-package util;
+package com.bankingcli.util;
 
-import model.Account;
-import model.Customer;
-import model.Transaction;
-import model.enums.AccountType;
-import service.AccountService;
-import service.CustomerService;
-import service.TransactionService;
+import com.bankingcli.model.Account;
+import com.bankingcli.model.Customer;
+import com.bankingcli.model.Transaction;
+import com.bankingcli.model.enums.AccountType;
+import com.bankingcli.service.AccountService;
+import com.bankingcli.service.CustomerService;
+import com.bankingcli.service.TransactionService;
 
 import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;

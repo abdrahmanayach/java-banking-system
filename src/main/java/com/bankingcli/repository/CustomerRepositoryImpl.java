@@ -1,7 +1,7 @@
-package repository;
+package com.bankingcli.repository;
 
-import model.Customer;
-import util.DatabaseConnection;
+import com.bankingcli.model.Customer;
+import com.bankingcli.util.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

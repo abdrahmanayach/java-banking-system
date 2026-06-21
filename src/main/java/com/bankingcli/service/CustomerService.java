@@ -1,8 +1,8 @@
-package service;
+package com.bankingcli.service;
 
-import exception.CustomerNotFoundException;
-import model.Customer;
-import repository.CustomerRepository;
+import com.bankingcli.exception.CustomerNotFoundException;
+import com.bankingcli.model.Customer;
+import com.bankingcli.repository.CustomerRepository;
 
 import java.util.List;
 

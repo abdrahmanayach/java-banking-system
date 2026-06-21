@@ -1,10 +1,10 @@
-package repository;
+package com.bankingcli.repository;
 
-import model.Account;
-import model.CheckingAccount;
-import model.SavingsAccount;
-import model.enums.AccountType;
-import util.DatabaseConnection;
+import com.bankingcli.model.Account;
+import com.bankingcli.model.CheckingAccount;
+import com.bankingcli.model.SavingsAccount;
+import com.bankingcli.model.enums.AccountType;
+import com.bankingcli.util.DatabaseConnection;
 
 import java.math.BigDecimal;
 

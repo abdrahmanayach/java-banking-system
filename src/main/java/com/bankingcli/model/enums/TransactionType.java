@@ -1,4 +1,4 @@
-package model.enums;
+package com.bankingcli.model.enums;
 
 public enum TransactionType {
     DEPOSIT,

@@ -1,8 +1,10 @@
-import repository.*;
-import service.AccountService;
-import service.CustomerService;
-import service.TransactionService;
-import util.MenuHandler;
+package com.bankingcli;
+
+import com.bankingcli.repository.*;
+import com.bankingcli.service.AccountService;
+import com.bankingcli.service.CustomerService;
+import com.bankingcli.service.TransactionService;
+import com.bankingcli.util.MenuHandler;
 
 import java.util.Scanner;
 

@@ -1,7 +1,7 @@
-package model;
+package com.bankingcli.model;
 
-import exception.InsufficientFundsException;
-import model.enums.AccountType;
+import com.bankingcli.exception.InsufficientFundsException;
+import com.bankingcli.model.enums.AccountType;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

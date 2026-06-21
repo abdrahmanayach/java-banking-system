@@ -1,8 +1,8 @@
-package repository;
+package com.bankingcli.repository;
 
-import model.Transaction;
-import model.enums.TransactionType;
-import util.DatabaseConnection;
+import com.bankingcli.model.Transaction;
+import com.bankingcli.model.enums.TransactionType;
+import com.bankingcli.util.DatabaseConnection;
 
 import java.sql.*;
 import java.time.LocalDateTime;

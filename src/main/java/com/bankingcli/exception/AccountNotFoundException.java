@@ -1,4 +1,4 @@
-package exception;
+package com.bankingcli.exception;
 
 public class AccountNotFoundException extends RuntimeException {
     public AccountNotFoundException(String message) {

@@ -1,13 +1,13 @@
-package service;
+package com.bankingcli.service;
 
-import exception.AccountNotFoundException;
-import exception.CustomerNotFoundException;
-import model.Account;
-import model.CheckingAccount;
-import model.SavingsAccount;
-import model.enums.AccountType;
-import repository.AccountRepository;
-import repository.CustomerRepository;
+import com.bankingcli.exception.AccountNotFoundException;
+import com.bankingcli.exception.CustomerNotFoundException;
+import com.bankingcli.model.Account;
+import com.bankingcli.model.CheckingAccount;
+import com.bankingcli.model.SavingsAccount;
+import com.bankingcli.model.enums.AccountType;
+import com.bankingcli.repository.AccountRepository;
+import com.bankingcli.repository.CustomerRepository;
 
 import java.math.BigDecimal;
 import java.util.List;

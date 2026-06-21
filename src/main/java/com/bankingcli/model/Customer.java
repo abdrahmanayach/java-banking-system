@@ -1,4 +1,4 @@
-package model;
+package com.bankingcli.model;
 
 import java.util.UUID;
 

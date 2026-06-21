@@ -1,6 +1,6 @@
-package repository;
+package com.bankingcli.repository;
 
-import model.Transaction;
+import com.bankingcli.model.Transaction;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package model;
+package com.bankingcli.model;
 
-import model.enums.AccountType;
+import com.bankingcli.model.enums.AccountType;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
